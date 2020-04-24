@@ -2,8 +2,12 @@
 
 buildscript {
     ext.kotlin_version = '1.3.61'
-    ext.butterknife_version = '8.8.1'
+    ext.butterknife_version = '10.0.0'
     ext.dagger_version = '2.27'
+    ext.mosby_version = '3.1.0'
+    ext.rxJava_version = '3.0.0'
+    ext.rxLifecycle = '2.0.5'
+    ext.jackson_version = '2.9.9'
     repositories {
         google()
         jcenter()

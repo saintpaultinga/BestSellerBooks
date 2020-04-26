@@ -39,14 +39,14 @@
                 android:fontFamily="sans-serif-black"
                 android:layout_height="wrap_content"
                 android:paddingStart="8dp"
-                android:text="Author"/>
+                android:text="@string/book_author"/>
             <TextView
                 android:id="@+id/book_item_author"
                 android:layout_width="match_parent"
                 android:textColor="@android:color/black"
                 android:paddingStart="8dp"
                 android:layout_height="wrap_content"
-                android:text="Author"/>
+                android:text="this will be the author name"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
                 android:fontFamily="sans-serif-black"
                 android:layout_marginBottom="8dp"
                 android:textColor="@android:color/black"
-                android:text="Book Description"/>
+                android:text="@string/book_desc"/>
             <TextView
                 android:id="@+id/book_item_desc_content"
                 android:layout_width="match_parent"

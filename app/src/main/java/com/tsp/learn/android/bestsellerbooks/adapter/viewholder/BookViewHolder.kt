@@ -1,6 +1,5 @@
 package com.tsp.learn.android.bestsellerbooks.adapter.viewholder
 
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -14,6 +13,7 @@ import com.tsp.learn.android.bestsellerbooks.data.model.Book
 import com.tsp.learn.android.bestsellerbooks.events.NavigateToAmazonEvent
 import org.greenrobot.eventbus.EventBus
 
+// TODO add unit test to cover this class
 class BookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     private val authorTxV = itemView.findViewById<TextView>(R.id.book_item_author)

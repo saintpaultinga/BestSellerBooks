@@ -48,9 +48,11 @@ dependencies {
     testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    api "androidx.test:core:1.2.0"
+    testImplementation "com.willowtreeapps.assertk:assertk-jvm:0.22"
 
     // TODO this is deprecated, should be replaced by viewBinding
-    kapt "com.jakewharton:butterknife:$butterknife_version"
+    api "com.jakewharton:butterknife:$butterknife_version"
     kapt "com.jakewharton:butterknife-compiler:$butterknife_version"
 
     // Dagger

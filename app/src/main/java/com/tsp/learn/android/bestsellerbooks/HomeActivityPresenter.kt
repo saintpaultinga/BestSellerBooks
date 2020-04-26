@@ -32,6 +32,7 @@ class HomeActivityPresenter @Inject constructor(private val bookRepository: Book
 
     @SuppressLint("CheckResult")
     override fun loadBestSellerBooks() {
+        // TODO handle network connexion errors
         bind(bookRepository.retrieveHardCoverFictionBooks())
             .subscribeOn(io())
             .observeOn(ui())
@@ -42,7 +43,11 @@ class HomeActivityPresenter @Inject constructor(private val bookRepository: Book
     }
 
     private fun displayError(error: Throwable) {
+        // TODO replace the logging with Timber library and also cover this method with a unit test
         Log.e(this.javaClass.simpleName,"Error loading saves data: ${error.message}")
+        ifViewAttached { view ->
+            view.showError()
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)

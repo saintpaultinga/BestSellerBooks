@@ -39,7 +39,7 @@ class HomeActivityPresenterTest {
     }
 
     @Test
-    fun testDemandListBook() {
+    fun testLoadBestSellerBooks() {
         homeActivityPresenter = spy(homeActivityPresenter)
         homeActivityPresenter.attachView(mockView)
         doReturn(Observable.just(demandBooks())).whenever(mockRepository).retrieveHardCoverFictionBooks()

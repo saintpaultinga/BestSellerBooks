@@ -16,6 +16,11 @@ interface HomeContract {
          *
          */
         fun navigateToBookCheckoutPage(bookUrl: String)
+
+        /**
+         * show error when an issue happens during the data loading
+         */
+        fun showError()
     }
 
     interface Presenter : MvpPresenter<View> {

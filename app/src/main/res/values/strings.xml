@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BestSellerBooks</string>
+    <string name="error_msg">Error loading data, please try later!</string>
 </resources>

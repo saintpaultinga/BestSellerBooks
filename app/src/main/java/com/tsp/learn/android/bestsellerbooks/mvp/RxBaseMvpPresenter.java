@@ -12,7 +12,7 @@ import io.reactivex.Observable;
 public abstract class RxBaseMvpPresenter<V extends MvpView>
         extends MvpBasePresenter<V> implements MvpPresenter<V> {
 
-   protected <T>Observable<T>  bind(Observable<T> observable) {
+   public  <T> Observable<T> bind(Observable<T> observable) {
        if (getView() == null) {
            return observable;
        }

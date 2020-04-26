@@ -1,23 +1,18 @@
 package com.tsp.learn.android.bestsellerbooks.di
 
-import android.app.Application
+import android.content.Context
 import com.tsp.learn.android.bestsellerbooks.BookApplication
-import dagger.BindsInstance
+import com.tsp.learn.android.bestsellerbooks.HomeActivity
 import dagger.Component
-import dagger.android.AndroidInjector
-import dagger.android.support.AndroidSupportInjectionModule
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [ActivityBindingModule::class, ApplicationModule::class, HomeModule::class, AndroidSupportInjectionModule::class])
-interface AppComponent : AndroidInjector<BookApplication> {
+@Component(modules = [AppModule::class,
+    HomeModule::class])
+interface AppComponent {
 
-    @Component.Builder
-    interface Builder {
+    fun inject(application: BookApplication)
 
-        @BindsInstance
-        fun application(application: Application): Builder
+    fun inject(mainActivity: HomeActivity)
 
-        fun build(): AppComponent
-    }
 }

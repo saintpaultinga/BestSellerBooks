@@ -1,12 +1,58 @@
 package com.tsp.learn.android.bestsellerbooks
 
+import android.annotation.SuppressLint
+import android.util.Log
 import com.tsp.learn.android.bestsellerbooks.contract.HomeContract
+import com.tsp.learn.android.bestsellerbooks.di.SchedulerProvider
+import com.tsp.learn.android.bestsellerbooks.events.NavigateToAmazonEvent
+import com.tsp.learn.android.bestsellerbooks.events.NavigationSubscriber
 import com.tsp.learn.android.bestsellerbooks.mvp.RxBaseMvpPresenter
+import com.tsp.learn.android.bestsellerbooks.repository.BookRepository
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+import javax.inject.Inject
 
-class HomeActivityPresenter : RxBaseMvpPresenter<HomeContract.View>(), HomeContract.Presenter {
+class HomeActivityPresenter @Inject constructor(private val bookRepository: BookRepository,
+                                                private val eventBus: EventBus) :
+    RxBaseMvpPresenter<HomeContract.View>(), HomeContract.Presenter, NavigationSubscriber, SchedulerProvider {
 
-    override fun loadBestSellerBooks() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun attachView(view: HomeContract.View) {
+        super.attachView(view)
+        eventBus.register(this)
     }
 
+    override fun detachView() {
+        super.detachView()
+        eventBus.unregister(this)
+    }
+
+    @SuppressLint("CheckResult")
+    override fun loadBestSellerBooks() {
+        bind(bookRepository.retrieveHardCoverFictionBooks())
+            .subscribeOn(io())
+            .observeOn(ui())
+            .subscribe({bookResponse ->
+            ifViewAttached { view ->
+                view.onBooksLoaded(bookResponse)
+            }}, this::displayError)
+    }
+
+    private fun displayError(error: Throwable) {
+        Log.e(this.javaClass.simpleName,"Error loading saves data: ${error.message}")
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    override fun navigateToBookCheckout(event: NavigateToAmazonEvent) {
+        ifViewAttached { view ->
+            view.navigateToBookCheckoutPage(event.bookUrl)
+        }
+    }
+
+    override fun io(): Scheduler = Schedulers.io()
+
+    override fun ui(): Scheduler = AndroidSchedulers.mainThread()
 }

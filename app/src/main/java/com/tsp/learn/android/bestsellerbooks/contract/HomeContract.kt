@@ -2,20 +2,20 @@ package com.tsp.learn.android.bestsellerbooks.contract
 
 import com.hannesdorfmann.mosby3.mvp.MvpPresenter
 import com.hannesdorfmann.mosby3.mvp.MvpView
-import com.tsp.learn.android.bestsellerbooks.model.Books
+import com.tsp.learn.android.bestsellerbooks.data.model.Book
 
 interface HomeContract {
     interface View : MvpView {
         /**
          * @param bookList the list of books to be displayed
          */
-        fun onBooksLoaded(bookList:List<Books>)
+        fun onBooksLoaded(bookList:List<Book>?)
 
         /**
-         * @param book refresh the current book from the list
-         * called to update the book cover image.
+         * @param bookUrl used to navigate to the book amazon page
+         *
          */
-        fun updateBookCover(book: Books)
+        fun navigateToBookCheckoutPage(bookUrl: String)
     }
 
     interface Presenter : MvpPresenter<View> {

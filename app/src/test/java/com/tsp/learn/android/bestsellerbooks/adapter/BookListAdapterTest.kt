@@ -15,7 +15,6 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment.application
 
 @RunWith(RobolectricTestRunner::class)
 class BookListAdapterTest {
@@ -24,8 +23,8 @@ class BookListAdapterTest {
     private val mockBook = mock<Book>()
     private val mockBookViewHolder = mock<BookViewHolder>()
 
-    lateinit var bookListAdapter: BookListAdapter
-    lateinit var context: ContextThemeWrapper
+    private lateinit var bookListAdapter: BookListAdapter
+    private lateinit var context: ContextThemeWrapper
 
     @Before
     fun setUp() {
